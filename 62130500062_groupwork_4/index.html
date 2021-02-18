@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Vue Js - HelloWorld App</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+
+  <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+  <!-- Using via Google Web Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- https://tailwindcss.com/docs/installation -->
+  <!-- Using Tailwind via CDN -->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+  <link href="styles.css" rel="stylesheet" />
+
+  <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+  <!-- Vue CDN -->
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body id="app" class="w-full bg-yellow-100">
+ 
+  </div>
+    <div  class="max-w-xl mx-auto space-y-3">
+      <h1 class="text-xl text-start">
+        Photo Gallery Like ( {{ photos.filter( t => t.done ).length }} )
+      </h1>
+      <span class="material-icons text-3xl cursor-pointer ml-72" :class="{'hidden' :searchbutton  }"><i
+          class="fas fa-search" @click="search"></i></span>
+      <span :class="{'hidden' : !searchbutton}">
+        <input class="px-2 border-2 border-black mx-2" placeholder="Please enter text for searching photos"
+          v-model="text" />
+        <button class="mx-2 rouned text-white px-4 py-2 bg-blue-500" @click="search">
+          Cancle
+        </button>
+      </span>
+
+      <div v-show="hasView" class="w-full">
+        <div style="background-color: black; padding: 50px">
+          <span class="far fa-window-close text-white float-right mx-2 rouned px-4 py-2 bg-white-500"
+            @click="distoggleView(photo)">
+          </span>
+
+          <img v-bind:src="viewImg" height="400" width="400" style="align-items: center" />
+        </div>
+      </div>
+
+      <div class="w-96" v-if="searching.length !== 0 ">
+        <ul>
+          <li v-for="(photo,index) in searching" :class="{done: photo.done}">
+            <img v-on:click="toggleDone(photo)" @dblclick="toggleView(photo)" v-bind:src="photo.url" />
+            <div class="">{{photo.title}}</div>
+            <p class="mb-2">
+              <i v-show="photo.done" class="fas fa -2xl fa-heart text-red-500"></i>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div v-else class="mt-10 bg-white shadow-lg rounded w-full mx-auto px-auto py-5 flex justify-center">
+        <h2 class="mb-2 text-2xl font-bold text-gray-800">No Photos.</h2>
+      </div>
+    </div>
+  </div>
+  <!-- my main.js -->
+  <script src="./main.js"></script>
+</body>
+
+</html>
