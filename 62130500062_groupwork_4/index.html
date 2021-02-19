@@ -23,43 +23,43 @@
 </head>
 
 <body id="app" class="w-full bg-yellow-100">
- 
+  <!-- open the picture in photo canvas -->
+  <div >
+    <div v-show="hasView" class="fixed flex justify-center h-screen w-screen top-0 bg-black ">
+      <div class="h-screen m-6 ">
+          <i class="far fa-2x fa-window-close text-white flex-row-reverse cursor-pointer" @click="distoggleView()"></i>
+          <img :src="viewImg" class="h-5/6 p-6 ">
+      </div>
   </div>
-    <div  class="max-w-xl mx-auto space-y-3">
-      <h1 class="text-xl text-start">
+  <!-- Total Photos like -->
+    <div  class="max-w-xl mx-auto space-y-3 ">
+      <h1 class="text-3xl text-start">
         Photo Gallery Like ( {{ photos.filter( t => t.done ).length }} )
       </h1>
+      <!-- text box for searching photos -->
       <span class="material-icons text-3xl cursor-pointer ml-72" :class="{'hidden' :searchbutton  }"><i
           class="fas fa-search" @click="search"></i></span>
       <span :class="{'hidden' : !searchbutton}">
-        <input class="px-2 border-2 border-black mx-2" placeholder="Please enter text for searching photos"
+        <input class="px-2 border-2 border-black mx-2" placeholder="searching photos"
           v-model="text" />
         <button class="mx-2 rouned text-white px-4 py-2 bg-blue-500" @click="search">
           Cancle
         </button>
       </span>
 
-      <div v-show="hasView" class="w-full">
-        <div style="background-color: black; padding: 50px">
-          <span class="far fa-window-close text-white float-right mx-2 rouned px-4 py-2 bg-white-500"
-            @click="distoggleView(photo)">
-          </span>
-
-          <img v-bind:src="viewImg" height="400" width="400" style="align-items: center" />
-        </div>
-      </div>
-
-      <div class="w-96" v-if="searching.length !== 0 ">
+      <!-- Searching photos -->
+      <div class="w-96 " v-if="searching.length !== 0 ">
         <ul>
           <li v-for="(photo,index) in searching" :class="{done: photo.done}">
             <img v-on:click="toggleDone(photo)" @dblclick="toggleView(photo)" v-bind:src="photo.url" />
             <div class="">{{photo.title}}</div>
             <p class="mb-2">
-              <i v-show="photo.done" class="fas fa -2xl fa-heart text-red-500"></i>
+              <i v-show="photo.done" class="far fa-3x fa-heart text-red-500"></i>
             </p>
           </li>
         </ul>
       </div>
+      <!-- Show no photos -->
       <div v-else class="mt-10 bg-white shadow-lg rounded w-full mx-auto px-auto py-5 flex justify-center">
         <h2 class="mb-2 text-2xl font-bold text-gray-800">No Photos.</h2>
       </div>
