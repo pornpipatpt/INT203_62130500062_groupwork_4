@@ -21,9 +21,6 @@ const app = {
     toggleDone(photo) {
       this.photos[photo.no-1].done = !this.photos[photo.no-1].done;
     },
-    searchBarToggle() {
-      this.searchbutton = !this.searchbutton
-    },
     search() {
       this.searchbutton = !this.searchbutton;
       this.text = '';
